@@ -7,8 +7,9 @@ readme = "README.md"
 packages = [{include = "test_driven_development"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-
+python = "^3.6"
+selenium = "3.141.0"
+django = "1.11.29"
 
 [build-system]
 requires = ["poetry-core"]
