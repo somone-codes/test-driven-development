@@ -4,12 +4,14 @@ import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from django.test import LiveServerTestCase
 
 
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self) -> None:
-        self.browser = webdriver.Firefox(executable_path=r'C:\Users\YugandharG\REPO\test-driven-development\geckodriver.exe')  # ADD geckodriver path here before testing
+        self.browser = webdriver.Firefox(
+            executable_path=r'C:\Users\YugandharG\REPO\test-driven-development\geckodriver.exe')  # ADD geckodriver path here before testing
 
     def tearDown(self) -> None:
         self.browser.close()
@@ -22,7 +24,7 @@ class NewVisitorTest(unittest.TestCase):
     def test_can_start_a_list_and_retrieve_it_later(self):
         # Mr.X has heard about a cool new online to-do app. They go
         # to check out its homepage
-        self.browser.get("http://localhost:8000")
+        self.browser.get(self.live_server_url)
 
         # They notice the page title and header mention to-do lists
         self.assertIn('To-Do', self.browser.title)
@@ -59,8 +61,3 @@ class NewVisitorTest(unittest.TestCase):
         self.fail("Complete the test!")
 
         # They visit that URL - her to-do list is still there.
-
-
-
-if __name__ == '__main__':
-    unittest.main()

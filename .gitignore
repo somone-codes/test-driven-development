@@ -159,4 +159,4 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-tests/geckodriver.log
+functional_tests/geckodriver.log
