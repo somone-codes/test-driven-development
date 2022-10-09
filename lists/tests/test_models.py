@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db.models import QuerySet
 from django.test import TestCase
 
@@ -33,3 +34,14 @@ class ListAndItemModelSaveTest(TestCase):
         self.assertEqual(first_saved_item.list, list_)
         self.assertEqual(second_saved_item.text, "I am item2")
         self.assertEqual(second_saved_item.list, list_)
+
+    def test_cannot_save_empty_list(self):
+        list_ = List.objects.create()
+        item = Item(list=list_, text='')
+
+        with self.assertRaises(ValidationError):
+            item.save()
+            # SQLite doesn't support enforcing emptiness constraints on text columns,
+            # and so our save method is letting this invalid value through silently.
+            # Hence, full_clean to check validation
+            item.full_clean()
