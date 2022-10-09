@@ -160,3 +160,4 @@ dmypy.json
 cython_debug/
 
 functional_tests/geckodriver.log
+/static
