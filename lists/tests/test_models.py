@@ -45,3 +45,7 @@ class ListAndItemModelSaveTest(TestCase):
             # and so our save method is letting this invalid value through silently.
             # Hence, full_clean to check validation
             item.full_clean()
+
+    def test_get_absolute_url(self):
+        list_ = List.objects.create()
+        self.assertEqual(list_.get_absolute_url(), f'/lists/{list_.id}/')
