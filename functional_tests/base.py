@@ -10,8 +10,7 @@ MAX_WAIT = 10
 class FunctionalTest(StaticLiveServerTestCase):
 
     def setUp(self) -> None:
-        self.browser = webdriver.Firefox(
-            executable_path=r'C:\Users\YugandharG\REPO\test-driven-development\geckodriver.exe')  # ADD geckodriver path here before testing
+        self.browser = webdriver.Firefox()  # Optional ADD geckodriver path here before testing
 
     def tearDown(self) -> None:
         self.browser.close()

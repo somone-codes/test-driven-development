@@ -17,7 +17,7 @@ def view_and_add_list(request: HttpRequest, list_id: int) -> HttpResponse:
 
     if request.method == 'POST':
         try:
-            item = Item(text=request.POST['item_text'], list=list_)
+            item = Item(text=request.POST['text'], list=list_)
             item.full_clean()
             item.save()
             return redirect(list_)
@@ -30,7 +30,7 @@ def view_and_add_list(request: HttpRequest, list_id: int) -> HttpResponse:
 def new_list(request: HttpRequest) -> HttpResponse:
     if request.POST:
         list_ = List.objects.create()
-        item = Item.objects.create(text=request.POST['item_text'], list=list_)
+        item = Item.objects.create(text=request.POST['text'], list=list_)
         try:
             item.full_clean()
         except ValidationError:
