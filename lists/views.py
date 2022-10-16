@@ -1,5 +1,6 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
+from django.views.generic import FormView
 
 from lists.forms import ItemForm, ExistingListItemForm
 from lists.models import List
@@ -8,6 +9,11 @@ from lists.models import List
 # Create your views here.
 def home_page(request: HttpRequest) -> HttpResponse:
     return render(request, 'home.html', {'form': ItemForm()})
+
+
+class HomePageView(FormView):
+    template_name = 'home.html'
+    form_class = ItemForm
 
 
 def view_and_add_list(request: HttpRequest, list_id: int) -> HttpResponse:
