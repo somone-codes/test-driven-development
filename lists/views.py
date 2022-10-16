@@ -1,6 +1,6 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
-from django.views.generic import FormView
+from django.views.generic import FormView, CreateView
 
 from lists.forms import ItemForm, ExistingListItemForm
 from lists.models import List
@@ -35,3 +35,12 @@ def new_list(request: HttpRequest) -> HttpResponse:
         return redirect(list_)
     else:
         return render(request, 'home.html', {"form": form})
+
+class NewListView(CreateView):
+    template_name = 'home.html'
+    form_class = ItemForm
+
+    def form_valid(self, form):
+        list_ = List.objects.create()
+        form.save(for_list=list_)
+        return redirect(list_)
